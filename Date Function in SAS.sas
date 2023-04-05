@@ -1,0 +1,12 @@
+******* Common Date Functions for Creating Columns****************;
+LIBNAME XLSTORM xlsx "/home/u61234377/EXL8410-8414/EXLFILE/storm.xlsx";
+LIBNAME OUT base "/home/u61234377/EXL8410-8414/OUTPUT";
+data out.storm_damage_date;
+set xlstorm.storm_damage;
+drop summary;
+YearsPassed=yrdif(Date,today(),"age");
+Anniversary=mdy(month(Date),day(Date),year(today()));
+format YearsPassed 4.1 Date Anniversary mmddyy10.;
+run;
+proc print data=out.storm_damage_date;
+run;
